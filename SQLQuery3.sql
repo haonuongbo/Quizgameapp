@@ -1,0 +1,10 @@
+﻿CREATE TABLE Users (
+    Id INT PRIMARY KEY IDENTITY,
+    UserName NVARCHAR(100)
+);
+
+ALTER TABLE HighScores
+ADD UserId INT;
+
+ALTER TABLE HighScores
+ADD CONSTRAINT FK_HighScores_Users FOREIGN KEY (UserId) REFERENCES Users(Id);
