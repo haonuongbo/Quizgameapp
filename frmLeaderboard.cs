@@ -19,14 +19,16 @@ namespace Đồ_án_ứng_dụng
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 string query = @"
-                    SELECT TOP 10 
-                        ROW_NUMBER() OVER (ORDER BY hs.Score DESC) AS [#],
-                        u.UserID AS [Người chơi],
-                        hs.Score AS [Điểm],
-                        hs.DateAchieved AS [Ngày lập]
-                    FROM HighScores hs
-                    LEFT JOIN Users u ON hs.UserId = u.Id
-                    ORDER BY hs.Score DESC";
+    SELECT TOP 10 
+        hs.Id,
+        ROW_NUMBER() OVER (ORDER BY hs.Score DESC) AS [#],
+        u.UserID AS [Người chơi],
+        hs.Score AS [Điểm],
+        hs.DateAchieved AS [Ngày lập]
+    FROM HighScores hs
+    LEFT JOIN Users u ON hs.UserId = u.Id
+    ORDER BY hs.Score DESC";
+
 
                 SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
                 DataTable dt = new DataTable();
@@ -52,5 +54,38 @@ namespace Đồ_án_ứng_dụng
         {
 
         }
+        private void btnDeleteScore_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Vui lòng chọn dòng muốn xóa.");
+                return;
+            }
+
+            // Lấy ID điểm đã chọn từ dòng đầu tiên
+            int highScoreId = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["Id"].Value);
+
+            DialogResult result = MessageBox.Show("Bạn có chắc muốn xóa điểm này?", "Xác nhận xóa", MessageBoxButtons.YesNo);
+            if (result != DialogResult.Yes) return;
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("DELETE FROM HighScores WHERE Id = @id", conn);
+                cmd.Parameters.AddWithValue("@id", highScoreId);
+
+                int affected = cmd.ExecuteNonQuery();
+                if (affected > 0)
+                {
+                    MessageBox.Show("Xóa thành công!");
+                    frmLeaderboard_Load(null, null); // reload lại bảng
+                }
+                else
+                {
+                    MessageBox.Show("Không thể xóa!");
+                }
+            }
+        }
+
     }
 }
