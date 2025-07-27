@@ -92,14 +92,13 @@
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.lblUserID);
             this.Controls.Add(this.txtUserID);
-            this.Name = "frmStart";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Start Quiz Game";
-            this.Load += new System.EventHandler(this.frmStart_Load_1);
-            this.ResumeLayout(false);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-
+            this.Name = "frmStart";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Trò chơi Đố Vui Kiến Thức ";
+            this.Load += new System.EventHandler(this.frmStart_Load_1);
+            this.ResumeLayout(false);
             this.PerformLayout();
 
         }

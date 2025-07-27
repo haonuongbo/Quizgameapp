@@ -200,6 +200,7 @@ namespace Đồ_án_ứng_dụng
 
         private void btnNewGame_Click(object sender, EventArgs e)
         {
+            
             if (cbCategory.SelectedItem == null)
             {
                 MessageBox.Show("Vui lòng chọn chủ đề trước khi chơi.");
@@ -253,8 +254,7 @@ namespace Đồ_án_ứng_dụng
             lblSelectCategory.Location = new Point(cbCategory.Left + 10, cbCategory.Top - 20);
             btnNewGame.Location = new Point(cbCategory.Left, cbCategory.Bottom + 5);
             btnBack.Location = new Point(width - margin - 75, height - 50);
-            lblScore.Location = new Point(margin, height - 65);
-            lblHighScore.Location = new Point(margin, height - 45);
+            
 
             // ✅ Tăng cỡ chữ theo kích thước form
             int baseFontSize = 12;
@@ -271,12 +271,12 @@ namespace Đồ_án_ứng_dụng
             btnC.Font = newFontBold;
             btnD.Font = newFontBold;
 
-            lblScore.Font = newFontRegular;
-            lblHighScore.Font = newFontRegular;
+            
         }
 
+        private void lblScore_Click(object sender, EventArgs e)
+        {
 
-
-
+        }
     }
 }
