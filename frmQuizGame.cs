@@ -278,5 +278,10 @@ namespace Đồ_án_ứng_dụng
         {
 
         }
+
+        private void helpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
